@@ -634,22 +634,22 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer (JNIEnv* env, jobject thisobj
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer_Tilemap (JNIEnv* env, jobject thisobj, jint nlayer, jint tilemap)
 {
-	return TLN_SetLayerTilemap(int nlayer, (TLN_Tilemap) tilemap);
+	return TLN_SetLayerTilemap(nlayer, (TLN_Tilemap) tilemap);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer_Priority (JNIEnv* env, jobject thisobj, jint nlayer, jboolean enable)
 {
-	return TLN_SetLayerPriority(int nlayer, bool enable);
+	return TLN_SetLayerPriority(nlayer, enable);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer_Parent (JNIEnv* env, jobject thisobj, jint nlayer, jint parent)
 {
-	return TLN_SetLayerParent(int nlayer, int parent);
+	return TLN_SetLayerParent(nlayer, parent);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_DisableLayer (JNIEnv* env, jobject thisobj, jint nlayer)
 {
-	return TLN_DisableLayerParent(int nlayer);
+	return TLN_DisableLayerParent(nlayer);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayerPalette (JNIEnv* env, jobject thisobj, jint nlayer, jint palette)
@@ -774,7 +774,7 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_SetSpriteFlags (JNIEnv* env, jobject t
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_EnableSpriteFlags (JNIEnv* env, jobject thisobj, jint nsprite, jshort flag, jboolean enable)
 {
-	return TLN_EnableSpriteFlag(int nsprite, uint32_t flag, bool enable);
+	return TLN_EnableSpriteFlag(nsprite, flag, enable);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetSpritePosition (JNIEnv* env, jobject thisobj, jint nsprite, jint x, jint y)
@@ -829,27 +829,27 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_GetSpriteCollision (JNIEnv* env, jobje
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetFirstSprite (JNIEnv* env, jobject thisobj, jint nsprite)
 {
-	return TLN_SetFirstSprite(int nsprite);
+	return TLN_SetFirstSprite(nsprite);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetNextSprite (JNIEnv* env, jobject thisobj, jint nsprite, jint next)
 {
-	return TLN_SetNextSprite(int nsprite, int next);
+	return TLN_SetNextSprite(nsprite, next);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_EnableSpriteMasking (JNIEnv* env, jobject thisobj, jint nsprite, jboolean enable)
 {
-	return TLN_EnableSpriteMasking(int nsprite, bool enable);
+	return TLN_EnableSpriteMasking(nsprite, enable);
 }
 
-JNIEXPORT void JNICALL Java_Tilengine_SetSpriteMaskRegion (JNIEnv* env, jobject thisobj, jint top_line, jint bottom_line)
+JNIEXPORT void JNICALL Java_Tilengine_SetSpritesMaskRegion (JNIEnv* env, jobject thisobj, jint top_line, jint bottom_line)
 {
-	return  TLN_SetSpritesMaskRegion(int top_line, int bottom_line);
+	return  TLN_SetSpritesMaskRegion(top_line, bottom_line);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_DisableSpriteAnimation (JNIEnv* env, jobject thisobj, jint nsprite)
 {
-	return TLN_DisableSpriteAnimation(int nsprite);
+	return TLN_DisableSpriteAnimation(nsprite);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_DisableSprite (JNIEnv* env, jobject thisobj, jint nsprite)
@@ -957,9 +957,9 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_GetAnimationState (JNIEnv* env, jobjec
 	return TLN_GetAnimationState (index);
 }
 
-JNIEXPORT jboolean JNICALL Java_Tilengine_SetAnimationDelay (JNIEnv* env, jobject thisobj, jint index, jint delay)
+JNIEXPORT jboolean JNICALL Java_Tilengine_SetAnimationDelay (JNIEnv* env, jobject thisobj, jint index, jint frame, jint delay)
 {
-	return TLN_SetAnimationDelay (index, delay);
+	return TLN_SetAnimationDelay (index, frame, delay);
 }
 
 JNIEXPORT jint JNICALL Java_Tilengine_GetAvailableAnimation (JNIEnv* env, jobject thisobj)
@@ -967,9 +967,9 @@ JNIEXPORT jint JNICALL Java_Tilengine_GetAvailableAnimation (JNIEnv* env, jobjec
 	return TLN_GetAvailableAnimation ();
 }
 
-JNIEXPORT jboolean JNICALL Java_Tilengine_DisableAnimation (JNIEnv* env, jobject thisobj, jint index)
+JNIEXPORT jboolean JNICALL Java_Tilengine_DisablePaletteAnimation (JNIEnv* env, jobject thisobj, jint index)
 {
-	return TLN_DisableAnimation (index);
+	return TLN_DisablePaletteAnimation (index);
 } 
 
 // ****************************************************************************

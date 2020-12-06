@@ -128,9 +128,9 @@ public class Tilengine
 	public native boolean SetBGPalette (int palette);
 	public native void SetRasterCallback (Object obj, String methodname);
 	public native void SetRenderTarget (int[] data, int pitch);
-	public native void UpdateFrame (int time);
-	public native void BeginFrame (int time);
-	public native boolean DrawNextScanline ();
+	public native void UpdateFrame (int frame);
+	// public native void BeginFrame (int time);
+	// public native boolean DrawNextScanline ();
 	public native void SetLoadPath (String path);
 	
 	// error handling 
@@ -144,7 +144,7 @@ public class Tilengine
 	public native boolean ProcessWindow ();
 	public native boolean IsWindowActive ();
 	public native boolean GetInput (int id);
-	public native void DrawFrame (int time);
+	public native void DrawFrame (int frame);
 	public native void WaitRedraw ();
 	public native void DeleteWindow ();
 	public native void EnableBlur (boolean mode);
@@ -152,6 +152,8 @@ public class Tilengine
 	public native void Delay (int time);
 	public native void BeginWindowFrame ();
 	public native void EndWindowFrame ();
+	public native int GetWindowHeight();
+	public native int GetWindowWidth();
 	
 	// spritesets management 
 	public native int LoadSpriteset (String name);
@@ -169,6 +171,8 @@ public class Tilengine
 	public native int GetTileHeight (int tileset);
 	public native int GetTilesetPalette (int tileset);
 	public native boolean DeleteTileset (int tileset);
+	public native int GetTilesetNumTiles (int tileset);
+
 	
 	// tilemaps management 
 	public native int LoadTilemap (String filename, String layername);
@@ -179,6 +183,8 @@ public class Tilengine
 	public native boolean SetTilemapTile (int tilemap, int row, int col, Tile tile);
 	public native void CopyTiles (int src, int srcrow, int srccol, int rows, int cols, int dst, int dstrow, int dstcol);
 	public native boolean DeleteTilemap (int tilemap);
+	public native boolean SetLayerTilemap (int nlayer, int tilemap);
+
 	
 	// color tables management 
 	public native int CreatePalette (int entries);
@@ -215,6 +221,9 @@ public class Tilengine
 	public native boolean DisableLayer (int nlayer);
 	public native int GetLayerPalette (int nlayer);
 	public native boolean GetLayerTile (int nlayer, int x, int y, TileInfo info);
+	public native boolean SetLayerPriority (int nlayer, boolean enable);
+	public native boolean SetLayerParent (int nlayer, int parent);
+	public native boolean DisableLayerParent (int nlayer);
 
 	// sprites management 
 	public native boolean ConfigSprite (int nsprite, int spriteset, short flags);
@@ -232,6 +241,12 @@ public class Tilengine
 	public native boolean GetSpriteCollision (int nsprite);
 	public native boolean DisableSprite (int nsprite);
 	public native int GetSpritePalette (int nsprite);
+	public native boolean EnableSpriteFlag (int nsprite, short flag, boolean enable);
+	public native boolean SetFirstSprite (int nsprite);
+	public native boolean SetNextSprite (int nsprite, int next);
+	public native boolean EnableSpriteMasking (int nsprite, boolean enable);
+	public native void SetSpritesMaskingRegion (int top_line, int bottom_line);
+	public native boolean DisableSpriteAnimation (int nsprite);
 
 	// sequences management 
 	public native int CloneSequence (int src);
@@ -251,7 +266,10 @@ public class Tilengine
 	public native boolean SetTilemapAnimation (int index, int nlayer, int sequence);
 	public native boolean SetSpriteAnimation (int index, int nsprite, int sequence, int loop);
 	public native boolean GetAnimationState (int index);
-	public native boolean SetAnimationDelay (int index, int delay);
+	public native boolean SetAnimationDelay (int index, int frame, int delay);
 	public native int GetAvailableAnimation ();
-	public native boolean DisableAnimation (int index);	
+	public native boolean DisablePaletteAnimation (int index);	
+
+	// updated functions
+
 }
