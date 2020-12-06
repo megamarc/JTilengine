@@ -970,7 +970,7 @@ JNIEXPORT jint JNICALL Java_Tilengine_GetAvailableAnimation (JNIEnv* env, jobjec
 JNIEXPORT jboolean JNICALL Java_Tilengine_DisableAnimation (JNIEnv* env, jobject thisobj, jint index)
 {
 	return TLN_DisableAnimation (index);
-}
+} 
 
 // ****************************************************************************
 // Update
