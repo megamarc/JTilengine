@@ -26,7 +26,7 @@ SOFTWARE.
 // http://www.tilengine.org
 // ****************************************************************************
 
-#include <jni.h>
+#include "jni.h"
 #include "Tilengine.h"
 
 struct
@@ -407,7 +407,7 @@ JNIEXPORT jint JNICALL Java_Tilengine_GetTileHeight (JNIEnv* env, jobject thisob
 	return TLN_GetTileHeight ((TLN_Tileset)tileset);
 }
 
-JNIEXPORT jiny JNICALL Java_Tilengine_GetTilesetNumTiles(JNIEnv* env, jobject thisobj, jint tileset)
+JNIEXPORT jint JNICALL Java_Tilengine_GetTilesetNumTiles(JNIEnv* env, jobject thisobj, jint tileset)
 {
 	return TLN_GetTilesetNumTiles((TLN_Tileset)tileset);
 }
@@ -649,7 +649,7 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer_Parent (JNIEnv* env, jobject 
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_DisableLayer (JNIEnv* env, jobject thisobj, jint nlayer)
 {
-	return TLN_DisableLayerParent(nlayer);
+	return TLN_DisableLayer(nlayer);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayerPalette (JNIEnv* env, jobject thisobj, jint nlayer, jint palette)
@@ -711,10 +711,10 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_ResetLayerMode (JNIEnv* env, jobject t
 	return TLN_ResetLayerMode (nlayer);
 }
 
-JNIEXPORT jboolean JNICALL Java_Tilengine_DisableLayer (JNIEnv* env, jobject thisobj, jint nlayer)
-{
-	return TLN_DisableLayer (nlayer);
-}
+//JNIEXPORT jboolean JNICALL Java_Tilengine_DisableLayer (JNIEnv* env, jobject thisobj, jint nlayer)
+//{
+//	return TLN_DisableLayer (nlayer);
+//}
 
 JNIEXPORT jint JNICALL Java_Tilengine_GetLayerPalette (JNIEnv* env, jobject thisobj, jint nlayer)
 {
@@ -947,9 +947,9 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_SetTilemapAnimation (JNIEnv* env, jobj
 	return TLN_SetTilemapAnimation (index, nlayer, (TLN_Sequence)sequence);
 }
 
-JNIEXPORT jboolean JNICALL Java_Tilengine_SetSpriteAnimation (JNIEnv* env, jobject thisobj, jint index, jint nsprite, jint sequence, jint loop)
+JNIEXPORT jboolean JNICALL Java_Tilengine_SetSpriteAnimation (JNIEnv* env, jobject thisobj, jint nsprite, jint sequence, jint loop)
 {
-	return TLN_SetSpriteAnimation (index, nsprite, (TLN_Sequence)sequence, loop);
+	return TLN_SetSpriteAnimation (nsprite, (TLN_Sequence)sequence, loop);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_GetAnimationState (JNIEnv* env, jobject thisobj, jint index)
