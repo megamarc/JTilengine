@@ -391,8 +391,8 @@ TLNAPI void TLN_UpdateFrame (int frame);
 TLNAPI void TLN_SetLoadPath (const char* path);
 TLNAPI void TLN_SetCustomBlendFunction (TLN_BlendFunction);
 TLNAPI void TLN_SetLogLevel(TLN_LogLevel log_level);
-TLNAPI bool TLN_OpenResourcePack(const char* filename, const char* key);
-TLNAPI void TLN_CloseResourcePack(void);
+TLNAPI bool TLN_OpenResourcePack(const char* filename, const char* key); // TO UPDATE!!!!
+TLNAPI void TLN_CloseResourcePack(void); // TO UPDATE!!!!
 
 /**@}*/
 
@@ -452,7 +452,7 @@ TLNAPI bool TLN_DeleteSpriteset (TLN_Spriteset Spriteset);
  * \brief Tileset resources management for background layers 
 * @{ */
 TLNAPI TLN_Tileset TLN_CreateTileset (int numtiles, int width, int height, TLN_Palette palette, TLN_SequencePack sp, TLN_TileAttributes* attributes);
-TLNAPI TLN_Tileset TLN_CreateImageTileset(int numtiles, TLN_TileImage* images);
+TLNAPI TLN_Tileset TLN_CreateImageTileset(int numtiles, TLN_TileImage* images); // TO UPDATE!!!!
 TLNAPI TLN_Tileset TLN_LoadTileset (const char* filename);
 TLNAPI TLN_Tileset TLN_CloneTileset (TLN_Tileset src);
 TLNAPI bool TLN_SetTilesetPixels (TLN_Tileset tileset, int entry, uint8_t* srcdata, int srcpitch);
@@ -513,7 +513,7 @@ TLNAPI bool TLN_SetBitmapPalette (TLN_Bitmap bitmap, TLN_Palette palette);
 TLNAPI bool TLN_DeleteBitmap (TLN_Bitmap bitmap);
 /**@}*/
 
-/**
+/** TO UPDATE!!!!
  * \defgroup objects
  * \brief ObjectList resources management
  * @{ */
@@ -546,7 +546,7 @@ TLNAPI bool TLN_DisableLayerClip (int nlayer);
 TLNAPI bool TLN_SetLayerMosaic (int nlayer, int width, int height);
 TLNAPI bool TLN_DisableLayerMosaic (int nlayer);
 TLNAPI bool TLN_ResetLayerMode (int nlayer);
-TLNAPI bool TLN_SetLayerObjects(int nlayer, TLN_ObjectList objects, TLN_Tileset tileset);
+TLNAPI bool TLN_SetLayerObjects(int nlayer, TLN_ObjectList objects, TLN_Tileset tileset); // TO UPDATE!!!!
 TLNAPI bool TLN_SetLayerPriority(int nlayer, bool enable);
 TLNAPI bool TLN_SetLayerParent(int nlayer, int parent);
 TLNAPI bool TLN_DisableLayerParent(int nlayer);
@@ -578,12 +578,12 @@ TLNAPI int  TLN_GetSpritePicture (int nsprite);
 TLNAPI int  TLN_GetAvailableSprite (void);
 TLNAPI bool TLN_EnableSpriteCollision (int nsprite, bool enable);
 TLNAPI bool TLN_GetSpriteCollision (int nsprite);
-TLNAPI bool TLN_GetSpriteState(int nsprite, TLN_SpriteState* state);
+TLNAPI bool TLN_GetSpriteState(int nsprite, TLN_SpriteState* state); // TO UPDATE!!!!
 TLNAPI bool TLN_SetFirstSprite(int nsprite);
 TLNAPI bool TLN_SetNextSprite(int nsprite, int next);
 TLNAPI bool TLN_EnableSpriteMasking(int nsprite, bool enable);
 TLNAPI void TLN_SetSpritesMaskRegion(int top_line, int bottom_line);
-TLNAPI bool TLN_SetSpriteAnimation (int nsprite, TLN_Sequence sequence, int loop);
+TLNAPI bool TLN_SetSpriteAnimation (int nsprite, TLN_Sequence sequence, int loop); // TO UPDATE!!!!
 TLNAPI bool TLN_DisableSpriteAnimation(int nsprite);
 TLNAPI bool TLN_DisableSprite (int nsprite);
 TLNAPI TLN_Palette TLN_GetSpritePalette (int nsprite);
@@ -595,7 +595,7 @@ TLNAPI TLN_Palette TLN_GetSpritePalette (int nsprite);
 * @{ */
 TLNAPI TLN_Sequence TLN_CreateSequence (const char* name, int target, int num_frames, TLN_SequenceFrame* frames);
 TLNAPI TLN_Sequence TLN_CreateCycle (const char* name, int num_strips, TLN_ColorStrip* strips);
-TLNAPI TLN_Sequence TLN_CreateSpriteSequence(const char* name, TLN_Spriteset spriteset, const char* basename, int delay);
+TLNAPI TLN_Sequence TLN_CreateSpriteSequence(const char* name, TLN_Spriteset spriteset, const char* basename, int delay); // TO UPDATE!!!!
 TLNAPI TLN_Sequence TLN_CloneSequence (TLN_Sequence src);
 TLNAPI bool TLN_GetSequenceInfo (TLN_Sequence sequence, TLN_SequenceInfo* info);
 TLNAPI bool TLN_DeleteSequence (TLN_Sequence sequence);

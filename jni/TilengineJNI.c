@@ -157,7 +157,7 @@ JNIEXPORT void JNICALL Java_Tilengine_SetRenderTarget (JNIEnv* env, jobject this
 	}
 }
 
-JNIEXPORT void JNICALL Java_Tilengine_UpdateFrame (JNIEnv* env, jobject thisobj, jint time)
+JNIEXPORT void JNICALL Java_Tilengine_UpdateFrame (JNIEnv* env, jobject thisobj, jint frame)
 {
 	jint* buffer;
 
@@ -165,20 +165,20 @@ JNIEXPORT void JNICALL Java_Tilengine_UpdateFrame (JNIEnv* env, jobject thisobj,
 	{
 		buffer = (*env)->GetIntArrayElements (env, target.jia, NULL);
 		TLN_SetRenderTarget ((uint8_t*)buffer, target.pitch);
-		TLN_UpdateFrame (time);
+		TLN_UpdateFrame (frame);
 		(*env)->ReleaseIntArrayElements (env, target.jia, buffer, 0);
 	}
 }
 
-JNIEXPORT void JNICALL Java_Tilengine_BeginFrame (JNIEnv* env, jobject thisobj, jint time)
-{
-	TLN_BeginFrame (time);
-}
+//JNIEXPORT void JNICALL Java_Tilengine_BeginFrame (JNIEnv* env, jobject thisobj, jint time)
+//{
+//	TLN_BeginFrame (time);
+//}
 
-JNIEXPORT bool JNICALL Java_Tilengine_DrawNextScanline (JNIEnv* env, jobject thisobj)
-{
-	return TLN_DrawNextScanline ();
-}
+//JNIEXPORT bool JNICALL Java_Tilengine_DrawNextScanline (JNIEnv* env, jobject thisobj)
+//{
+//	return TLN_DrawNextScanline ();
+//}
 
 JNIEXPORT void JNICALL Java_Tilengine_SetLoadPath (JNIEnv* env, jobject thisobj, jstring path)
 {
@@ -250,9 +250,9 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_GetInput (JNIEnv* env, jobject thisobj
 	return TLN_GetInput (input);
 }
 
-JNIEXPORT void JNICALL Java_Tilengine_DrawFrame (JNIEnv* env, jobject thisobj, jint time)
+JNIEXPORT void JNICALL Java_Tilengine_DrawFrame (JNIEnv* env, jobject thisobj, jint frame)
 {
-	TLN_DrawFrame (time);
+	TLN_DrawFrame (frame);
 }
 
 JNIEXPORT void JNICALL Java_Tilengine_WaitRedraw (JNIEnv* env, jobject thisobj)
@@ -280,9 +280,19 @@ JNIEXPORT void JNICALL Java_Tilengine_Delay (JNIEnv* env, jobject thisobj, jint 
 	TLN_Delay (time);
 }
 
-JNIEXPORT void JNICALL Java_Tilengine_BeginWindowFrame (JNIEnv* env, jobject thisobj, jint time)
+// JNIEXPORT void JNICALL Java_Tilengine_BeginWindowFrame (JNIEnv* env, jobject thisobj, jint time)
+// {
+// 	TLN_BeginWindowFrame (time);
+// }
+
+JNIEXPORT jint JNICALL Java_Tilengine_GetWindowWidth (JNIEnv* env, jobject thisobj)
 {
-	TLN_BeginWindowFrame (time);
+	return TLN_GetWindowWidth ();
+}
+
+JNIEXPORT jint JNICALL Java_Tilengine_GetWindowHeight (JNIEnv* env, jobject thisobj)
+{
+	return TLN_GetWindowHeight ();
 }
 
 JNIEXPORT void JNICALL Java_Tilengine_EndWindowFrame (JNIEnv* env, jobject thisobj)
@@ -382,10 +392,10 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_SetTilesetPixels (JNIEnv* env, jobject
 	return retval;
 }
 
-JNIEXPORT jboolean JNICALL Java_Tilengine_CopyTile (JNIEnv* env, jobject thisobj, jint tileset, jint src, jint dst)
-{
-	return TLN_CopyTile ((TLN_Tileset)tileset, src, dst);
-}
+//JNIEXPORT jboolean JNICALL Java_Tilengine_CopyTile (JNIEnv* env, jobject thisobj, jint tileset, jint src, jint dst)
+//{
+//	return TLN_CopyTile ((TLN_Tileset)tileset, src, dst);
+//}
 
 JNIEXPORT jint JNICALL Java_Tilengine_GetTileWidth (JNIEnv* env, jobject thisobj, jint tileset)
 {
@@ -395,6 +405,11 @@ JNIEXPORT jint JNICALL Java_Tilengine_GetTileWidth (JNIEnv* env, jobject thisobj
 JNIEXPORT jint JNICALL Java_Tilengine_GetTileHeight (JNIEnv* env, jobject thisobj, jint tileset)
 {
 	return TLN_GetTileHeight ((TLN_Tileset)tileset);
+}
+
+JNIEXPORT jiny JNICALL Java_Tilengine_GetTilesetNumTiles(JNIEnv* env, jobject thisobj, jint tileset)
+{
+	return TLN_GetTilesetNumTiles((TLN_Tileset)tileset);
 }
 
 JNIEXPORT jint JNICALL Java_Tilengine_GetTilesetPalette (JNIEnv* env, jobject thisobj, jint tileset)
@@ -617,6 +632,26 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer (JNIEnv* env, jobject thisobj
 	return TLN_SetLayer (nlayer, (TLN_Tileset)tileset, (TLN_Tilemap)tilemap);
 }
 
+JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer_Tilemap (JNIEnv* env, jobject thisobj, jint nlayer, jint tilemap)
+{
+	return TLN_SetLayerTilemap(int nlayer, (TLN_Tilemap) tilemap);
+}
+
+JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer_Priority (JNIEnv* env, jobject thisobj, jint nlayer, jboolean enable)
+{
+	return TLN_SetLayerPriority(int nlayer, bool enable);
+}
+
+JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer_Parent (JNIEnv* env, jobject thisobj, jint nlayer, jint parent)
+{
+	return TLN_SetLayerParent(int nlayer, int parent);
+}
+
+JNIEXPORT jboolean JNICALL Java_Tilengine_DisableLayer (JNIEnv* env, jobject thisobj, jint nlayer)
+{
+	return TLN_DisableLayerParent(int nlayer);
+}
+
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayerPalette (JNIEnv* env, jobject thisobj, jint nlayer, jint palette)
 {
 	return TLN_SetLayerPalette (nlayer, (TLN_Palette)palette);
@@ -737,6 +772,11 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_SetSpriteFlags (JNIEnv* env, jobject t
 	return TLN_SetSpriteFlags (nsprite, flags);
 }
 
+JNIEXPORT jboolean JNICALL Java_Tilengine_EnableSpriteFlags (JNIEnv* env, jobject thisobj, jint nsprite, jshort flag, jboolean enable)
+{
+	return TLN_EnableSpriteFlag(int nsprite, uint32_t flag, bool enable);
+}
+
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetSpritePosition (JNIEnv* env, jobject thisobj, jint nsprite, jint x, jint y)
 {
 	return TLN_SetSpritePosition (nsprite, x,y);
@@ -785,6 +825,31 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_EnableSpriteCollision (JNIEnv* env, jo
 JNIEXPORT jboolean JNICALL Java_Tilengine_GetSpriteCollision (JNIEnv* env, jobject thisobj, jint nsprite)
 {
 	return TLN_GetSpriteCollision (nsprite);
+}
+
+JNIEXPORT jboolean JNICALL Java_Tilengine_SetFirstSprite (JNIEnv* env, jobject thisobj, jint nsprite)
+{
+	return TLN_SetFirstSprite(int nsprite);
+}
+
+JNIEXPORT jboolean JNICALL Java_Tilengine_SetNextSprite (JNIEnv* env, jobject thisobj, jint nsprite, jint next)
+{
+	return TLN_SetNextSprite(int nsprite, int next);
+}
+
+JNIEXPORT jboolean JNICALL Java_Tilengine_EnableSpriteMasking (JNIEnv* env, jobject thisobj, jint nsprite, jboolean enable)
+{
+	return TLN_EnableSpriteMasking(int nsprite, bool enable);
+}
+
+JNIEXPORT void JNICALL Java_Tilengine_SetSpriteMaskRegion (JNIEnv* env, jobject thisobj, jint top_line, jint bottom_line)
+{
+	return  TLN_SetSpritesMaskRegion(int top_line, int bottom_line);
+}
+
+JNIEXPORT jboolean JNICALL Java_Tilengine_DisableSpriteAnimation (JNIEnv* env, jobject thisobj, jint nsprite)
+{
+	return TLN_DisableSpriteAnimation(int nsprite);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_DisableSprite (JNIEnv* env, jobject thisobj, jint nsprite)
@@ -906,3 +971,9 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_DisableAnimation (JNIEnv* env, jobject
 {
 	return TLN_DisableAnimation (index);
 }
+
+// ****************************************************************************
+// Update
+// ****************************************************************************
+
+// JNIEXPORT jboolean JNICALL Java_Tilengine_DisableAnimation (JNIEnv* env, jobject thisobj, jint index)
