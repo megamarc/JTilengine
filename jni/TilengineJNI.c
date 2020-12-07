@@ -295,10 +295,10 @@ JNIEXPORT jint JNICALL Java_Tilengine_GetWindowHeight (JNIEnv* env, jobject this
 	return TLN_GetWindowHeight ();
 }
 
-JNIEXPORT void JNICALL Java_Tilengine_EndWindowFrame (JNIEnv* env, jobject thisobj)
-{
-	TLN_EndWindowFrame ();
-}
+//JNIEXPORT void JNICALL Java_Tilengine_EndWindowFrame (JNIEnv* env, jobject thisobj)
+//{
+//	TLN_EndWindowFrame ();
+//}
 
 // ****************************************************************************
 // Spritesets
@@ -937,15 +937,15 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_SetPaletteAnimationSource (JNIEnv* env
 	return TLN_SetPaletteAnimationSource (index, (TLN_Palette)palette);
 }
 
-JNIEXPORT jboolean JNICALL Java_Tilengine_SetTilesetAnimation (JNIEnv* env, jobject thisobj, jint index, jint nlayer, jint sequence)
-{
-	return TLN_SetTilesetAnimation (index, nlayer, (TLN_Sequence)sequence);
-}
+//JNIEXPORT jboolean JNICALL Java_Tilengine_SetTilesetAnimation (JNIEnv* env, jobject thisobj, jint index, jint nlayer, jint sequence)
+//{
+//	return TLN_SetTilesetAnimation (index, nlayer, (TLN_Sequence)sequence);
+//}
 
-JNIEXPORT jboolean JNICALL Java_Tilengine_SetTilemapAnimation (JNIEnv* env, jobject thisobj, jint index, jint nlayer, jint sequence)
-{
-	return TLN_SetTilemapAnimation (index, nlayer, (TLN_Sequence)sequence);
-}
+//JNIEXPORT jboolean JNICALL Java_Tilengine_SetTilemapAnimation (JNIEnv* env, jobject thisobj, jint index, jint nlayer, jint sequence)
+//{
+//	return TLN_SetTilemapAnimation (index, nlayer, (TLN_Sequence)sequence);
+//}
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetSpriteAnimation (JNIEnv* env, jobject thisobj, jint nsprite, jint sequence, jint loop)
 {
