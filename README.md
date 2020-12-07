@@ -4,7 +4,7 @@
 ## About JTilengine
 JTilengine is the Java binding for Tilengine. It is a direct 1:1 API translation of the original C library, so it is used and works exactly as its C counterpart.<br>
 The single difference with the C API, is  that the original C API prepends every function calll with `TLN_` as a means of namespace, whereas in Java all the functions are housed as methods inside a single class called `Tilengine` without the `TLN_` prefix.
- > **Note:** this binding is not updated to the latest Tillengine release. It's stuck at release 1.11, but it's forwards compatible with current engine release.
+ > **Note:** This is a work in progress version 2.8.5 of Tilengine. the still non-updated functions are marked as "TO UPDATE!!!!" in the Tilengine.h header file. 
 
 ## Contents
 
@@ -22,7 +22,7 @@ File(s)               | Description
 ## Prerequisites
 1. JDK (Java Development Kit) must be properly installed and the `JAVA_HOME` environment variable set accordingly. Please visit https://www.oracle.com/index.html to know more about the JDK.
 2. Tilengine native shared library must be installed separately. Please refer to https://github.com/megamarc/Tilengine about how to do it.<br>
-For convenience, Windows 32-bit versions of Tilengine.dll and SDL2.dll are bundled.<br>
+Caution. All libraries are 64-bits.<br>
 
 ## Documentation
 Work in progress of the C API documentation can be found here:<br>
