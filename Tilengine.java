@@ -113,6 +113,8 @@ public class Tilengine
 		int xoffset;
 		int yoffset;
 		byte color;
+		byte type;
+		boolean empty;
 	}
 	
 	// basic management 

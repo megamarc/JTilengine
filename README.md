@@ -4,7 +4,7 @@
 ## About JTilengine
 JTilengine is the Java binding for Tilengine. It is a direct 1:1 API translation of the original C library, so it is used and works exactly as its C counterpart.<br>
 The single difference with the C API, is  that the original C API prepends every function calll with `TLN_` as a means of namespace, whereas in Java all the functions are housed as methods inside a single class called `Tilengine` without the `TLN_` prefix.
- > **Note:** This is a work in progress version 2.8.5 of Tilengine. the still non-updated functions are marked as "TO UPDATE!!!!" in the Tilengine.h header file. 
+ > **Note:** This is a work in progress update to version 2.8.5 of Tilengine. the still non-updated functions are marked as "TO UPDATE!!!!" in the Tilengine.h header file. 
 
 ## Contents
 

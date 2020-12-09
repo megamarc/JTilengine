@@ -300,6 +300,11 @@ JNIEXPORT jint JNICALL Java_Tilengine_GetWindowHeight (JNIEnv* env, jobject this
 //	TLN_EndWindowFrame ();
 //}
 
+JNIEXPORT void JNICALL Java_Tilengine_EnableCRTEffect(JNIEnv* env, jobject thisobj, jint overlay, jbyte overlay_factor, jbyte threshold, jbyte v0, jbyte v1, jbyte v2, jbyte v3, jboolean blur, jbyte glow_factor)
+{
+	TLN_EnableCRTEffect (overlay, overlay_factor, threshold, v0, v1, v2, v3, blur, glow_factor);
+}
+
 // ****************************************************************************
 // Spritesets
 // ****************************************************************************
@@ -742,6 +747,14 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_GetLayerTile (JNIEnv* env, jobject thi
 	if (fieldID)
 		(*env)->SetShortField (env, info, fieldID, ti.flags);
 
+	fieldID = (*env)->GetFieldID (env, clazz, "row", "I");
+	if (fieldID)
+		(*env)->SetIntField (env, info, fieldID, ti.row);
+
+	fieldID = (*env)->GetFieldID (env, clazz, "col", "I");
+	if (fieldID)
+		(*env)->SetIntField (env, info, fieldID, ti.col);
+
 	fieldID = (*env)->GetFieldID (env, clazz, "xoffset", "I");
 	if (fieldID)
 		(*env)->SetIntField (env, info, fieldID, ti.xoffset);
@@ -749,6 +762,18 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_GetLayerTile (JNIEnv* env, jobject thi
 	fieldID = (*env)->GetFieldID (env, clazz, "yoffset", "I");
 	if (fieldID)
 		(*env)->SetIntField (env, info, fieldID, ti.yoffset);
+
+	fieldID = (*env)->GetFieldID (env, clazz, "color", "B");
+	if (fieldID)
+		(*env)->SetByteField (env, info, fieldID, ti.color);
+
+	fieldID = (*env)->GetFieldID (env, clazz, "type", "B");
+	if (fieldID)
+		(*env)->SetByteField (env, info, fieldID, ti.type);	
+	
+	fieldID = (*env)->GetFieldID (env, clazz, "empty", "Z");
+	if (fieldID)
+		(*env)->SetBooleanField (env, info, fieldID, ti.empty);	
 
 	return true;
 }
