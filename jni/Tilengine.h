@@ -389,7 +389,7 @@ TLNAPI void TLN_SetFrameCallback (TLN_VideoCallback);
 TLNAPI void TLN_SetRenderTarget (uint8_t* data, int pitch);
 TLNAPI void TLN_UpdateFrame (int frame);
 TLNAPI void TLN_SetLoadPath (const char* path);
-TLNAPI void TLN_SetCustomBlendFunction (TLN_BlendFunction);
+TLNAPI void TLN_SetCustomBlendFunction (TLN_BlendFunction); // TO UPDATE!!!!
 TLNAPI void TLN_SetLogLevel(TLN_LogLevel log_level);
 TLNAPI bool TLN_OpenResourcePack(const char* filename, const char* key); // TO UPDATE!!!!
 TLNAPI void TLN_CloseResourcePack(void); // TO UPDATE!!!!
@@ -532,13 +532,13 @@ TLNAPI bool TLN_DeleteObjectList(TLN_ObjectList list);
 * @{ */
 TLNAPI bool TLN_SetLayer (int nlayer, TLN_Tileset tileset, TLN_Tilemap tilemap);
 TLNAPI bool TLN_SetLayerTilemap(int nlayer, TLN_Tilemap tilemap);
-TLNAPI bool TLN_SetLayerBitmap(int nlayer, TLN_Bitmap bitmap);
+TLNAPI bool TLN_SetLayerBitmap(int nlayer, TLN_Bitmap bitmap); // TO UPDATE!!!!
 TLNAPI bool TLN_SetLayerPalette (int nlayer, TLN_Palette palette);
 TLNAPI bool TLN_SetLayerPosition (int nlayer, int hstart, int vstart);
 TLNAPI bool TLN_SetLayerScaling (int nlayer, float xfactor, float yfactor);
 TLNAPI bool TLN_SetLayerAffineTransform (int nlayer, TLN_Affine *affine);
 TLNAPI bool TLN_SetLayerTransform (int layer, float angle, float dx, float dy, float sx, float sy);
-TLNAPI bool TLN_SetLayerPixelMapping (int nlayer, TLN_PixelMap* table);
+TLNAPI bool TLN_SetLayerPixelMapping (int nlayer, TLN_PixelMap* table); // TO UPDATE!!!!
 TLNAPI bool TLN_SetLayerBlendMode (int nlayer, TLN_Blend mode, uint8_t factor);
 TLNAPI bool TLN_SetLayerColumnOffset (int nlayer, int* offset);
 TLNAPI bool TLN_SetLayerClip (int nlayer, int x1, int y1, int x2, int y2);

@@ -637,19 +637,24 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer (JNIEnv* env, jobject thisobj
 	return TLN_SetLayer (nlayer, (TLN_Tileset)tileset, (TLN_Tilemap)tilemap);
 }
 
-JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer_Tilemap (JNIEnv* env, jobject thisobj, jint nlayer, jint tilemap)
+JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayerTilemap (JNIEnv* env, jobject thisobj, jint nlayer, jint tilemap)
 {
 	return TLN_SetLayerTilemap(nlayer, (TLN_Tilemap) tilemap);
 }
 
-JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer_Priority (JNIEnv* env, jobject thisobj, jint nlayer, jboolean enable)
+JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayerPriority (JNIEnv* env, jobject thisobj, jint nlayer, jboolean enable)
 {
 	return TLN_SetLayerPriority(nlayer, enable);
 }
 
-JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayer_Parent (JNIEnv* env, jobject thisobj, jint nlayer, jint parent)
+JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayerParent (JNIEnv* env, jobject thisobj, jint nlayer, jint parent)
 {
 	return TLN_SetLayerParent(nlayer, parent);
+}
+
+JNIEXPORT jboolean JNICALL Java_Tilengine_DisableLayerParent (JNIEnv* env, jobject thisobj, jint nlayer)
+{
+	return TLN_DisableLayerParent(nlayer);
 }
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_DisableLayer (JNIEnv* env, jobject thisobj, jint nlayer)
@@ -711,15 +716,20 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_DisableLayerClip (JNIEnv* env, jobject
 	return TLN_DisableLayerClip (nlayer);
 }
 
+JNIEXPORT jboolean JNICALL Java_Tilengine_SetLayerMosaic (JNIEnv* env, jobject thisobj, jint nlayer, jint width, jint height)
+{
+	return TLN_SetLayerMosaic (nlayer, width, height);
+}
+
+JNIEXPORT jboolean JNICALL Java_Tilengine_DisableLayerMosaic (JNIEnv* env, jobject thisobj, jint nlayer)
+{
+	return TLN_DisableLayerMosaic (nlayer);
+}
+
 JNIEXPORT jboolean JNICALL Java_Tilengine_ResetLayerMode (JNIEnv* env, jobject thisobj, jint nlayer)
 {
 	return TLN_ResetLayerMode (nlayer);
 }
-
-//JNIEXPORT jboolean JNICALL Java_Tilengine_DisableLayer (JNIEnv* env, jobject thisobj, jint nlayer)
-//{
-//	return TLN_DisableLayer (nlayer);
-//}
 
 JNIEXPORT jint JNICALL Java_Tilengine_GetLayerPalette (JNIEnv* env, jobject thisobj, jint nlayer)
 {
@@ -776,6 +786,16 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_GetLayerTile (JNIEnv* env, jobject thi
 		(*env)->SetBooleanField (env, info, fieldID, ti.empty);	
 
 	return true;
+}
+
+JNIEXPORT jint JNICALL Java_Tilengine_GetLayerWidth (JNIEnv* env, jobject thisobj, jint nlayer)
+{
+	return TLN_GetLayerWidth (nlayer);
+}
+
+JNIEXPORT jint JNICALL Java_Tilengine_GetLayerHeight (JNIEnv* env, jobject thisobj, jint nlayer)
+{
+	return TLN_GetLayerHeight (nlayer);
 }
 
 // ****************************************************************************
