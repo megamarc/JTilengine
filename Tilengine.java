@@ -78,6 +78,15 @@ public class Tilengine
 	public static final int INPUT_B			= 6;
 	public static final int INPUT_C			= 7;
 	public static final int INPUT_D			= 8;
+
+	// overlays for CRT effect
+
+	public static final int TLN_OVERLAY_NONE        	= 0; /*!< no overlay */
+	public static final int TLN_OVERLAY_SHADOWMASK      = 1; /*!< Shadow mask pattern */
+	public static final int TLN_OVERLAY_APERTURE        = 2; /*!< Aperture grille pattern */
+	public static final int TLN_OVERLAY_SCANLINES       = 3; /*!< Scanlines pattern */
+	public static final int TLN_OVERLAY_CUSTOM          = 4; /*!< User-provided when calling TLN_CreateWindow() */
+	public static final int TLN_MAX_OVERLAY             = 5;
 	
 	// affine transform 
 	final class Affine{
