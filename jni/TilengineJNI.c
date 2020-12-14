@@ -1,6 +1,6 @@
 /*
 JTilengine - Java binding for 2D Graphics library with raster effects
-Copyright (c) 2015-2018 Marc Palacios Domenech (megamarc@hotmail.com)
+Copyright (c) 2015-2020 Marc Palacios Domenech (megamarc@hotmail.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,11 @@ SOFTWARE.
 */
 
 // ****************************************************************************
-// Tilengine Java JNI wrapper - Up to date to library version 1.11
+// Tilengine Java JNI wrapper - Work in progress Update to library version 2.8.5
 // http://www.tilengine.org
 // ****************************************************************************
 
-#include "jni.h"
+#include <jni.h>
 #include "Tilengine.h"
 
 struct
@@ -1016,9 +1016,3 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_DisablePaletteAnimation (JNIEnv* env, 
 {
 	return TLN_DisablePaletteAnimation (index);
 } 
-
-// ****************************************************************************
-// Update
-// ****************************************************************************
-
-// JNIEXPORT jboolean JNICALL Java_Tilengine_DisableAnimation (JNIEnv* env, jobject thisobj, jint index)
