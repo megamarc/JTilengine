@@ -134,6 +134,7 @@ public class Tilengine
 	// public native void BeginFrame (int time);
 	// public native boolean DrawNextScanline ();
 	public native void SetLoadPath (String path);
+	public native void SetWindowTitle (String title);
 	
 	// error handling 
 	public native void SetLastError (int error);

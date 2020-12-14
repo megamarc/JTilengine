@@ -125,5 +125,6 @@ _Java_Tilengine_SetSpriteSet@16
 _Java_Tilengine_SetSpritesMaskRegion@16
 _Java_Tilengine_SetTilemapTile@24
 _Java_Tilengine_SetTilesetPixels@24
+_Java_Tilengine_SetWindowTitle@12
 _Java_Tilengine_UpdateFrame@12
 _Java_Tilengine_WaitRedraw@8

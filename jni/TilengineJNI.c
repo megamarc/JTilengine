@@ -113,6 +113,15 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_SetBGPalette (JNIEnv* env, jobject thi
 	return TLN_SetBGPalette ((TLN_Palette)palette);
 }
 
+JNIEXPORT void JNICALL Java_Tilengine_SetWindowTitle (JNIEnv* env, jobject thisobj, jstring title)
+{
+	const char* chars = NULL;
+	
+	chars = (*env)->GetStringUTFChars (env, title, NULL);
+	TLN_SetWindowTitle (chars);
+	(*env)->ReleaseStringUTFChars (env, title, chars);
+}
+
 JNIEXPORT void JNICALL Java_Tilengine_SetRasterCallback (JNIEnv* env, jobject thisobj, jobject obj, jstring methodname)
 {
 	/* release previous */
