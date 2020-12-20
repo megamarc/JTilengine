@@ -179,16 +179,6 @@ JNIEXPORT void JNICALL Java_Tilengine_UpdateFrame (JNIEnv* env, jobject thisobj,
 	}
 }
 
-//JNIEXPORT void JNICALL Java_Tilengine_BeginFrame (JNIEnv* env, jobject thisobj, jint time)
-//{
-//	TLN_BeginFrame (time);
-//}
-
-//JNIEXPORT bool JNICALL Java_Tilengine_DrawNextScanline (JNIEnv* env, jobject thisobj)
-//{
-//	return TLN_DrawNextScanline ();
-//}
-
 JNIEXPORT void JNICALL Java_Tilengine_SetLoadPath (JNIEnv* env, jobject thisobj, jstring path)
 {
 	const char* chars = NULL;
@@ -289,11 +279,6 @@ JNIEXPORT void JNICALL Java_Tilengine_Delay (JNIEnv* env, jobject thisobj, jint 
 	TLN_Delay (time);
 }
 
-// JNIEXPORT void JNICALL Java_Tilengine_BeginWindowFrame (JNIEnv* env, jobject thisobj, jint time)
-// {
-// 	TLN_BeginWindowFrame (time);
-// }
-
 JNIEXPORT jint JNICALL Java_Tilengine_GetWindowWidth (JNIEnv* env, jobject thisobj)
 {
 	return TLN_GetWindowWidth ();
@@ -303,11 +288,6 @@ JNIEXPORT jint JNICALL Java_Tilengine_GetWindowHeight (JNIEnv* env, jobject this
 {
 	return TLN_GetWindowHeight ();
 }
-
-//JNIEXPORT void JNICALL Java_Tilengine_EndWindowFrame (JNIEnv* env, jobject thisobj)
-//{
-//	TLN_EndWindowFrame ();
-//}
 
 JNIEXPORT void JNICALL Java_Tilengine_EnableCRTEffect(JNIEnv* env, jobject thisobj, jint overlay, jbyte overlay_factor, jbyte threshold, jbyte v0, jbyte v1, jbyte v2, jbyte v3, jboolean blur, jbyte glow_factor)
 {
@@ -990,16 +970,6 @@ JNIEXPORT jboolean JNICALL Java_Tilengine_SetPaletteAnimationSource (JNIEnv* env
 {
 	return TLN_SetPaletteAnimationSource (index, (TLN_Palette)palette);
 }
-
-//JNIEXPORT jboolean JNICALL Java_Tilengine_SetTilesetAnimation (JNIEnv* env, jobject thisobj, jint index, jint nlayer, jint sequence)
-//{
-//	return TLN_SetTilesetAnimation (index, nlayer, (TLN_Sequence)sequence);
-//}
-
-//JNIEXPORT jboolean JNICALL Java_Tilengine_SetTilemapAnimation (JNIEnv* env, jobject thisobj, jint index, jint nlayer, jint sequence)
-//{
-//	return TLN_SetTilemapAnimation (index, nlayer, (TLN_Sequence)sequence);
-//}
 
 JNIEXPORT jboolean JNICALL Java_Tilengine_SetSpriteAnimation (JNIEnv* env, jobject thisobj, jint nsprite, jint sequence, jint loop)
 {

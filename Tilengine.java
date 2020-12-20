@@ -33,13 +33,14 @@ public class Tilengine
 	}
 	
 	// CreateWindow flags 
-	public static final int CWF_FULLSCREEN	= (1<<0);
-	public static final int CWF_VSYNC		= (1<<1);
-	public static final int CWF_S1			= (1<<2);
-	public static final int CWF_S2			= (2<<2);
-	public static final int CWF_S3			= (3<<2);
-	public static final int CWF_S4			= (4<<2);
-	public static final int CWF_S5			= (5<<2);		
+	public static final int CWF_FULLSCREEN	= (1 << 0);
+	public static final int CWF_VSYNC		= (1 << 1);
+	public static final int CWF_S1			= (1 << 2);
+	public static final int CWF_S2			= (2 << 2);
+	public static final int CWF_S3			= (3 << 2);
+	public static final int CWF_S4			= (4 << 2);
+	public static final int CWF_S5			= (5 << 2);		
+	public static final int CWF_NEAREST		= (6 << 2);
 	
 	// error codes 
 	public static final int TLN_ERR_OK				= 0;	// No error 
@@ -59,14 +60,21 @@ public class Tilengine
 	public static final int TLN_ERR_FILE_NOT_FOUND	= 14;	// Resource file not found 
 	public static final int TLN_ERR_WRONG_FORMAT	= 15;	// Resource file has invalid format 
 	public static final int TLN_ERR_WRONG_SIZE		= 16;	// A width or height parameter is invalid 
-	public static final int TLN_ERR_UNSUPPORTED		= 17;
+	public static final int TLN_ERR_UNSUPPORTED		= 17;	// Unsupported function
+	public static final int TLN_ERR_REF_LIST		= 18;	// Invalid TLN_ObjectList reference
 	
 	// SetLayerBlendMode & SetSpriteBlendMode modes 
-	public static final int BLEND_NONE		= 0;
-	public static final int BLEND_MIX		= 1;
-	public static final int BLEND_ADD		= 2;
-	public static final int BLEND_SUB		= 3;
-	public static final int BLEND_MOD		= 4;
+	public static final int BLEND_NONE	= 0;
+	public static final int BLEND_MIX	= 1;
+	public static final int BLEND_ADD	= 2;
+	public static final int BLEND_SUB	= 3;
+	public static final int BLEND_MOD	= 4;
+	
+	// Player
+	public static final int PLAYER1 = 0;
+	public static final int PLAYER2 = 1;
+	public static final int PLAYER3 = 2;
+	public static final int PLAYER4 = 3;	
 	
 	// GetInput 
 	public static final int INPUT_NONE		= 0;
@@ -74,10 +82,29 @@ public class Tilengine
 	public static final int INPUT_DOWN		= 2;
 	public static final int INPUT_LEFT		= 3;
 	public static final int INPUT_RIGHT		= 4;
-	public static final int INPUT_A			= 5;
-	public static final int INPUT_B			= 6;
-	public static final int INPUT_C			= 7;
-	public static final int INPUT_D			= 8;
+	public static final int INPUT_BUTTON1	= 5;
+	public static final int INPUT_BUTTON2	= 6;
+	public static final int INPUT_BUTTON3	= 7;
+	public static final int INPUT_BUTTON4	= 8;
+	public static final int INPUT_BUTTON5	= 9;
+	public static final int INPUT_BUTTON6	= 10;
+	public static final int INPUT_START 	= 11;
+	public static final int INPUT_QUIT 		= 12;
+	public static final int INPUT_CRT 		= 13;
+	
+	// player request modifier flag
+	public static final int INPUT_P1 = (PLAYER1 << 5);
+	public static final int INPUT_P2 = (PLAYER2 << 5);
+	public static final int INPUT_P3 = (PLAYER3 << 5);
+	public static final int INPUT_P4 = (PLAYER4 << 5);
+	
+	// compatibility symbols for pre-1.18 input model
+	public static final int INPUT_A = INPUT_BUTTON1;
+	public static final int INPUT_B = INPUT_BUTTON2;
+	public static final int INPUT_C = INPUT_BUTTON3;
+	public static final int INPUT_D = INPUT_BUTTON4;
+	public static final int INPUT_E = INPUT_BUTTON5;
+	public static final int INPUT_F = INPUT_BUTTON6;
 
 	// overlays for CRT effect
 
@@ -107,13 +134,29 @@ public class Tilengine
 		short first;		// index of first color to cycle 
 		short count;		// number of colors in the cycle 
 		byte  dir;			// direction: 0=descending, 1=ascending 
-	}	
+	}
+	
+	// sequence info returned by GetSequenceInfo()
+	final class SequenceInfo{
+		String name;	// sequence name
+		int num_frames;	// number of frames
+	}
+	
+	// Sprite creation info for CreateSpriteset()
+	final class SpriteData{
+		String name;	// entry name
+		int x;			// horizontal position
+		int y;			// vertical position
+		int w;			// width
+		int h;			// height
+	}
 
-	final class SpriteInfo	{
+	final class SpriteInfo{
 		int offset;
 		int w,h;
 	}
 
+	// Tile information returned by GetLayerTile()
 	final class TileInfo{
 		short index;
 		short flags;
@@ -124,6 +167,20 @@ public class Tilengine
 		byte color;
 		byte type;
 		boolean empty;
+	}
+	
+	// Object item info returned by GetObjectInfo()
+	final class ObjectInfo{
+		short id;			// unique ID
+		short gid;			// graphic ID (tile index)
+		short flags;		// attributes (FLAG_FLIPX, FLAG_FLIPY, FLAG_PRIORITY)
+		int x;				// horizontal position
+		int y;				// vertical position
+		int width;			// horizontal size
+		int height;			// vertical size
+		byte type;			// type property
+		boolean visible;	// visible property
+		String name;		// name property
 	}
 	
 	// basic management 
@@ -140,15 +197,13 @@ public class Tilengine
 	public native void SetRasterCallback (Object obj, String methodname);
 	public native void SetRenderTarget (int[] data, int pitch);
 	public native void UpdateFrame (int frame);
-	// public native void BeginFrame (int time);
-	// public native boolean DrawNextScanline ();
 	public native void SetLoadPath (String path);
 	public native void SetWindowTitle (String title);
 	
 	// error handling 
 	public native void SetLastError (int error);
 	public native int GetLastError ();
-	//public native String GetErrorString (int error);
+	public native String GetErrorString (int error);
 
 	// window management 
 	public native boolean CreateWindow (String overlay, int flags);
@@ -184,7 +239,6 @@ public class Tilengine
 	public native int GetTilesetPalette (int tileset);
 	public native boolean DeleteTileset (int tileset);
 	public native int GetTilesetNumTiles (int tileset);
-
 	
 	// tilemaps management 
 	public native int LoadTilemap (String filename, String layername);
@@ -195,9 +249,7 @@ public class Tilengine
 	public native boolean SetTilemapTile (int tilemap, int row, int col, Tile tile);
 	public native void CopyTiles (int src, int srcrow, int srccol, int rows, int cols, int dst, int dstrow, int dstcol);
 	public native boolean DeleteTilemap (int tilemap);
-	public native boolean SetLayerTilemap (int nlayer, int tilemap);
 
-	
 	// color tables management 
 	public native int CreatePalette (int entries);
 	public native int LoadPalette (String filename);
@@ -219,28 +271,28 @@ public class Tilengine
 	public native boolean DeleteBitmap (int bitmap);
 
 	// layer management 
-    	public native boolean SetLayer (int nlayer, int tileset, int tilemap);
-    	public native boolean SetLayerPalette (int nlayer, int palette);
-    	public native boolean SetLayerPosition (int nlayer, int hstart, int vstart);
-    	public native boolean SetLayerScaling (int nlayer, float xfactor, float yfactor);
-    	public native boolean SetLayerAffineTransform (int nlayer, Affine affine);
-    	public native boolean SetLayerTransform (int layer, float angle, float dx, float dy, float sx, float sy);
-    	public native boolean SetLayerBlendMode (int nlayer, int mode, byte factor);
-    	public native boolean SetLayerColumnOffset (int nlayer, int[] offset);
-    	public native boolean SetLayerClip (int nlayer, int x1, int y1, int x2, int y2);
-    	public native boolean DisableLayerClip (int nlayer);
-    	public native boolean ResetLayerMode (int nlayer);
-    	public native boolean DisableLayer (int nlayer);
-    	public native int GetLayerPalette (int nlayer);
-    	public native boolean GetLayerTile (int nlayer, int x, int y, TileInfo info);
-    	public native boolean SetLayerPriority (int nlayer, boolean enable);
-    	public native boolean SetLayerParent (int nlayer, int parent);
-    	public native boolean DisableLayerParent (int nlayer);
-    	public native boolean SetLayerTilemap (int nlayer, int tilemap);
-    	public native boolean SetLayerMosaic (int nlayer, int width, int height);
-    	public native boolean DisableLayerMosaic (int nlayer);
-    	public native int GetLayerWidth (int nlayer);
-    	public native int GetLayerHeight (int nlayer);
+	public native boolean SetLayer (int nlayer, int tileset, int tilemap);
+	public native boolean SetLayerPalette (int nlayer, int palette);
+	public native boolean SetLayerPosition (int nlayer, int hstart, int vstart);
+	public native boolean SetLayerScaling (int nlayer, float xfactor, float yfactor);
+	public native boolean SetLayerAffineTransform (int nlayer, Affine affine);
+	public native boolean SetLayerTransform (int layer, float angle, float dx, float dy, float sx, float sy);
+	public native boolean SetLayerBlendMode (int nlayer, int mode, byte factor);
+	public native boolean SetLayerColumnOffset (int nlayer, int[] offset);
+	public native boolean SetLayerClip (int nlayer, int x1, int y1, int x2, int y2);
+	public native boolean DisableLayerClip (int nlayer);
+	public native boolean ResetLayerMode (int nlayer);
+	public native boolean DisableLayer (int nlayer);
+	public native int GetLayerPalette (int nlayer);
+	public native boolean GetLayerTile (int nlayer, int x, int y, TileInfo info);
+	public native boolean SetLayerPriority (int nlayer, boolean enable);
+	public native boolean SetLayerParent (int nlayer, int parent);
+	public native boolean DisableLayerParent (int nlayer);
+	public native boolean SetLayerTilemap (int nlayer, int tilemap);
+	public native boolean SetLayerMosaic (int nlayer, int width, int height);
+	public native boolean DisableLayerMosaic (int nlayer);
+	public native int GetLayerWidth (int nlayer);
+	public native int GetLayerHeight (int nlayer);
 
 	// sprites management 
 	public native boolean ConfigSprite (int nsprite, int spriteset, short flags);
@@ -263,6 +315,7 @@ public class Tilengine
 	public native boolean SetNextSprite (int nsprite, int next);
 	public native boolean EnableSpriteMasking (int nsprite, boolean enable);
 	public native void SetSpritesMaskingRegion (int top_line, int bottom_line);
+	public native boolean SetSpriteAnimation (int nsprite, int sequence, int loop);
 	public native boolean DisableSpriteAnimation (int nsprite);
 
 	// sequences management 
@@ -279,9 +332,6 @@ public class Tilengine
 	// animation engine 
 	public native boolean SetPaletteAnimation (int index, int palette, int sequence, boolean blend);
 	public native boolean SetPaletteAnimationSource (int index, int palette);
-	public native boolean SetTilesetAnimation (int index, int nlayer, int sequence);
-	public native boolean SetTilemapAnimation (int index, int nlayer, int sequence);
-	public native boolean SetSpriteAnimation (int index, int nsprite, int sequence, int loop);
 	public native boolean GetAnimationState (int index);
 	public native boolean SetAnimationDelay (int index, int frame, int delay);
 	public native int GetAvailableAnimation ();
