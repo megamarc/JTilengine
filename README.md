@@ -4,16 +4,13 @@
 ## About JTilengine
 JTilengine is the Java binding for Tilengine. It is a direct 1:1 API translation of the original C library, so it is used and works exactly as its C counterpart.<br>
 The single difference with the C API, is  that the original C API prepends every function calll with `TLN_` as a means of namespace, whereas in Java all the functions are housed as methods inside a single class called `Tilengine` without the `TLN_` prefix.
- > **Note:** This is a work in progress update to version 2.8.5 of Tilengine. the still non-updated functions are marked as "TO UPDATE!!!!" in the Tilengine.h header file. 
+ > **Note:** This is a work in progress update to version 2.8.5 of Tilengine. the still non-updated functions are marked as "TO UPDATE!!!!" in the Tilengine.h header file.
 
 ## Contents
 
 File(s)               | Description
 ----------------------|----------------------------------------------------------------
 `Tilengine.java`      | Java source with the API binding, required by any Java program
-`TilengineJNI.dll`    | prebuilt required JNI binding binary for 32-bit windows
-`Tilengine.dll`       | prebuilt required Tilengine binary for 32-bit windows
-`SDL2.dll`            | prebuilt required SDL2 binary for 32-bit windows
 `TestWindow.java`     | basic background test with raster effects, uses the built-in window
 `TestPanel.java`      | basic background test with raster effects, uses the AWT JPanel
 `/assets`             | graphic data used by the samples
@@ -22,7 +19,8 @@ File(s)               | Description
 ## Prerequisites
 1. JDK (Java Development Kit) 32-bits must be properly installed and the `JAVA_HOME` environment variable set accordingly. Please visit https://www.oracle.com/index.html to know more about the JDK.
 2. Tilengine native shared library must be installed separately. Please refer to https://github.com/megamarc/Tilengine about how to do it.<br>
-Caution. All libraries are 32-bits.<br>
+
+**Caution**. This JNI supports only 32-bit version of Tilengine. Don't try to build/use 64-bit version!<br>
 
 ## Documentation
 Work in progress of the C API documentation can be found here:<br>
@@ -32,8 +30,8 @@ http://www.tilengine.org/doc/
 No install step is required. Just make sure that the Tilengine library (*Tilengine.dll*, *Tilengine.java* and TilengineJNI.dll) are accessible from within your own project.
 
 ## Building the JNI bridge
-Unlike other languages, Java requires an intermediate shared library to interface to any external native library. This package already ships with a prebuilt 32-bit windows. However, to use it on other platform or upgrade it with more up to date features, it must be built from source. The source is just a single .c source file. Any C compiler can be used, for example gcc or the excellent [tiny C compiler (tcc)](https://bellard.org/tcc/).<br>
-To build the source, open a console window inside the `jni` folder and type the following command depending on your target OS:
+Unlike other languages, Java requires an intermediate shared library to interface to any external native library. The source is just a single .c source file. Any C compiler can be used, for example gcc or the excellent [tiny C compiler (tcc)](https://bellard.org/tcc/).<br>
+To build the source, open a console window inside the `jni` folder and type the following command depending on your target OS. Remember to make Tilengine binary (dll/so/dylib) accessible.
 
 ### Windows (Using Tiny C Compiler)
 ```
