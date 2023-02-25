@@ -40,7 +40,7 @@ tcc -shared -I"%JAVA_HOME%\include" -I"%JAVA_HOME%\include\win32" ..\Tilengine.d
 
 ### Linux (desktop, ARM raspberry...)
 ```
-gcc -shared -I"%JAVA_HOME%\include" -I"%JAVA_HOME%\include\linux" -lTilengine TilengineJNI.c -o ..\libTilengineJNI.so
+gcc -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" -lTilengine TilengineJNI.c -o ../libTilengineJNI.so
 ```
 
 ### Mac OSX
